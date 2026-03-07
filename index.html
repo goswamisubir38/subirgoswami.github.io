@@ -169,8 +169,8 @@ background:radial-gradient(ellipse 70% 55% at 70% 30%, rgba(201,168,76,0.045) 0%
 background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(201,168,76,0.022) 79px,rgba(201,168,76,0.022) 80px);
 mask-image:radial-gradient(ellipse 65% 80% at 50% 50%,black 20%,transparent 75%)}
 
-.hero-wrap{position:relative;z-index:2;width:100%;max-width:1060px;
-display:grid;grid-template-columns:1fr 260px;gap:3.5rem;align-items:center}
+.hero-wrap{position:relative;z-index:2;width:100%;max-width:1100px;
+display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:center}
 
 /* LEFT */
 .hero-l{display:flex;flex-direction:column}
@@ -183,11 +183,16 @@ opacity:0;animation:up 0.7s ease 0.1s forwards}
 /* Name */
 .hero-name{font-family:var(--serif);font-weight:900;line-height:0.93;letter-spacing:-0.02em;margin-bottom:1rem}
 .hn1{display:block;font-size:clamp(3.5rem,9.5vw,8rem);color:var(--paper);opacity:0;animation:up 1s ease 0.25s forwards}
-.hn2{display:block;font-size:clamp(3.5rem,9.5vw,8rem);font-style:italic;color:transparent;
--webkit-text-stroke:1.5px var(--gold);opacity:0;animation:up 1s ease 0.4s forwards;position:relative;overflow:hidden}
-.hn2-fill{position:absolute;inset:0;color:var(--gold);-webkit-text-stroke:0;
-clip-path:inset(0 100% 0 0);transition:clip-path 1.4s cubic-bezier(.23,1,.32,1);pointer-events:none;line-height:inherit;font-size:inherit}
-.hero-name:hover .hn2-fill{clip-path:inset(0 0% 0 0)}
+.hn2{display:block;font-size:clamp(3.5rem,9.5vw,8rem);font-style:italic;
+color:var(--gold);
+opacity:0;animation:up 1s ease 0.4s forwards;position:relative;
+-webkit-text-fill-color:transparent;
+-webkit-background-clip:text;
+background-clip:text;
+background-image:linear-gradient(135deg, var(--gold2) 0%, var(--gold) 50%, rgba(201,168,76,0.7) 100%);
+}
+.hn2-fill{display:none}
+/* hn2-fill removed */
 
 /* Primary tag — what he is */
 .hero-tag{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
@@ -585,36 +590,12 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 .tj{padding-left:2.2rem}
 .tj::before{left:0;top:0;bottom:0;width:3px;height:100%}
 
-/* ── SECTION PROGRESS DOTS ── */
-.progress-dots{
-  position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:0.7rem;z-index:400;
-}
-.pd{
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(237,229,212,0.15);
-  cursor:pointer;transition:all 0.3s;
-  border:none;padding:0;
-  position:relative;
-}
-.pd::before{
-  content:attr(data-label);
-  position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);
-  font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--gold);white-space:nowrap;
-  opacity:0;pointer-events:none;transition:opacity 0.2s;
-  background:rgba(8,6,3,0.9);padding:0.25rem 0.6rem;border-radius:3px;
-  border:1px solid var(--bw);
-}
-.pd:hover::before,.pd.active::before{opacity:1}
-.pd.active{background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.5)}
-.pd:hover{background:rgba(201,168,76,0.5);transform:scale(1.4)}
-@media(max-width:900px){.progress-dots{display:none}.btt{right:1rem;bottom:1.5rem}}
+@media(max-width:900px){.btt{right:1rem;bottom:1.5rem}}
 
 /* ── PRINT STYLES ── */
 @media print{
   body{background:#fff;color:#111;font-size:11pt}
-  nav,.btt,.progress-dots,.mm,.hb,footer{display:none!important}
+  nav,.btt,.mm,.hb,footer{display:none!important}
   .hero{min-height:auto;padding:2rem 0;background:#fff}
   .hn1{color:#111;font-size:2.5rem;-webkit-text-stroke:0}
   .hn2{color:#c9a84c;-webkit-text-stroke:0;font-size:2.5rem}
@@ -655,10 +636,11 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 
 .hero-photo-frame{
   position: relative;
-  width: clamp(200px, 22vw, 280px);
-  height: clamp(200px, 22vw, 280px);
+  width: clamp(180px, 20vw, 260px);
+  height: clamp(180px, 20vw, 260px);
   border-radius: 50%;
   flex-shrink: 0;
+  margin: 0 auto;
 }
 
 .hero-photo{
@@ -754,10 +736,11 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 }
 .hero-stats-row .hs-num{
   font-family: var(--serif);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
   color: var(--gold);
   line-height: 1;
+  white-space: nowrap;
 }
 .hero-stats-row .hs-lbl{
   font-family: var(--mono);
@@ -899,7 +882,7 @@ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap
 
       <h1 class="hero-name">
         <span class="hn1">Subir</span>
-        <span class="hn2" data-text="Goswami">Goswami<span class="hn2-fill" aria-hidden="true">Goswami</span></span>
+        <span class="hn2" data-text="Goswami">Goswami</span>
       </h1>
 
       <p class="hero-tag">Certified AI-Driven Professional &nbsp;·&nbsp; Growth Marketing Strategist &nbsp;·&nbsp; Co-Founder, KaliNova AI</p>
@@ -1425,47 +1408,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── SECTION PROGRESS DOTS ── */
-  const dots = document.querySelectorAll('.pd');
-  if (dots.length) {
-    const sectionTargets = ['#about','#ventures','#books','#credentials','#skills','#contact'];
 
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const t = dot.getAttribute('data-target');
-        if (!t || t === 'body') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          const target = document.querySelector(t);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    const dotSecs = sectionTargets
-      .map(s => document.querySelector(s))
-      .filter(Boolean);
-
-    if (dotSecs.length) {
-      const dotObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const idx = dotSecs.indexOf(e.target);
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx + 1));
-          }
-        });
-      }, { threshold: 0.4 });
-      dotSecs.forEach(s => dotObs.observe(s));
-    }
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY < 200) {
-        dots.forEach((d, i) => d.classList.toggle('active', i === 0));
-      }
-    }, { passive: true });
-
-    if (dots[0]) dots[0].classList.add('active');
-  }
 
 });
 </script>
@@ -1475,15 +1418,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 
-<!-- Section progress dots -->
-<nav class="progress-dots" aria-label="Page sections">
-  <button class="pd" data-target="body" data-label="Top" aria-label="Go to top"></button>
-  <button class="pd" data-target="#about" data-label="About" aria-label="Go to About"></button>
-  <button class="pd" data-target="#ventures" data-label="Ventures" aria-label="Go to Ventures"></button>
-  <button class="pd" data-target="#books" data-label="Books" aria-label="Go to Books"></button>
-  <button class="pd" data-target="#credentials" data-label="Credentials" aria-label="Go to Credentials"></button>
-  <button class="pd" data-target="#skills" data-label="Skills" aria-label="Go to Skills"></button>
-  <button class="pd" data-target="#contact" data-label="Contact" aria-label="Go to Contact"></button>
-</nav>
+
 </body>
 </html>
